@@ -1,0 +1,43 @@
+.gallery-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.image-container {
+  display: none;
+}
+
+.image-container.active {
+  display: block;
+}
+
+.controls {
+  
+}
+
+.controls .next,
+.controls .previous {
+  position: absolute;
+  top: calc(50% - 115px);
+}
+
+a {
+  text-decoration: none;
+  font-size: 200px;
+}
+
+a:hover {
+  color: black;
+}
+
+.previous {
+  color: black;
+  left: 10%;
+}
+
+.next {
+  color: black;
+  right: 10%;
+}
