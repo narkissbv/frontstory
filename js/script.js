@@ -1,11 +1,12 @@
-let index = 0;
+let index = 1;
 
 // Fetch images from API
 var images = null;
 xmlhttp=new XMLHttpRequest();
 xmlhttp.onreadystatechange=function() {
   if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-    images = JSON.parse(xmlhttp.responseText).slice(0,50);
+    // images = JSON.parse(xmlhttp.responseText).slice(0,50);
+    images = JSON.parse(xmlhttp.responseText);
     initGallery();
   }
 }
@@ -22,10 +23,12 @@ function initGallery() {
     let titleElem = clone.querySelector('.title');
     let imageElem = clone.querySelector('.image img');
     let albumElem = clone.querySelector('.album');
+    let testId = clone.querySelector('.text-id');
     imageContainerElem.dataset.id = image.id;
     titleElem.textContent = image.title;
     imageElem.src = image.url;
     albumElem.textContent = `Album ID: ${image.albumId}`;
+    testId.textContent = image.id;
     // add the clone element to the container element
     container.appendChild(clone);
   });
@@ -34,17 +37,21 @@ function initGallery() {
 
   // add event listeners to control buttons
   document.querySelector('.controls .previous').addEventListener('click', function () {
-    if (index === 0) {
+    document.querySelector(`[data-id="${index}"]`).classList.remove('active');
+    if (index === 1) {
       index = images.length
     } else {
       index--;
     }
+    document.querySelector(`[data-id="${index}"]`).classList.add('active');
   });
   document.querySelector('.controls .next').addEventListener('click', function () {
+    document.querySelector(`[data-id="${index}"]`).classList.remove('active');
     if (index === images.length) {
-      index = 0;
+      index = 1;
     } else {
       index++;
     }
+    document.querySelector(`[data-id="${index}"]`).classList.add('active');
   });
 }
